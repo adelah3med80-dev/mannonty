@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>كل سنة وإنتي طيبة يا منونتي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F2EDF7; --ink: #2A1838; --muted: #6E5A80; --accent: #C8641A;
+  --flame: #F2A03D; --glow: rgba(242,160,61,.45); --halo: rgba(242,160,61,.20); --wax: #E4D7EE;
+  --serif: "Amiri", "Noto Naskh Arabic", "Traditional Arabic", serif;
+  --sans: "Cairo", "Segoe UI", Tahoma, sans-serif;
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #140E21; --ink: #F3EAF8; --muted: #B7A5C9; --accent: #FFB766;
+    --flame: #FFB766; --glow: rgba(255,183,102,.38); --halo: rgba(255,183,102,.13); --wax: #CDBCE0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #140E21; --ink: #F3EAF8; --muted: #B7A5C9; --accent: #FFB766;
+  --flame: #FFB766; --glow: rgba(255,183,102,.38); --halo: rgba(255,183,102,.13); --wax: #CDBCE0;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--bg); scroll-padding-top: env(safe-area-inset-top, 0px); }
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: radial-gradient(48rem 26rem at 50% 0, var(--halo), transparent 70%);
+  background-repeat: no-repeat;
+  color: var(--ink);
+  font-family: var(--serif);
+}
+main { max-width: 36rem; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
+
+.hero { text-align: center; }
+.candle {
+  display: flex; flex-direction: column; align-items: center;
+  margin: 0 auto .4rem; padding: 1rem 2.5rem;
+  background: none; border: 0; cursor: pointer; font: inherit; color: inherit;
+}
+.candle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 10px; }
+.candle.out .flame { opacity: 0; transform: scale(.2); animation: none; }
+.flame {
+  width: 14px; height: 26px;
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: radial-gradient(circle at 50% 72%, #FFF6D8 0 24%, var(--flame) 68%, transparent 100%);
+  box-shadow: 0 0 38px 14px var(--glow);
+  transform-origin: 50% 100%;
+  animation: flicker 3.2s ease-in-out infinite;
+  transition: opacity .6s, transform .6s;
+}
+.wick { position: relative; width: 2px; height: 8px; background: var(--ink); }
+.candle.out .wick::after { content: ""; position: absolute; bottom: 100%; left: 50%; margin-left: -3px; width: 6px; height: 34px; border-radius: 50%; background: linear-gradient(to top, var(--muted), transparent); opacity: 0; animation: smoke 2.4s ease-out forwards; }
+@keyframes smoke {
+  0% { opacity: .55; transform: translateY(0) scaleX(1); }
+  100% { opacity: 0; transform: translateY(-26px) scaleX(2.2); }
+}
+.wax { width: 16px; height: 62px; border-radius: 3px; background: var(--wax); }
+@keyframes flicker {
+  0%, 100% { transform: scale(1, 1) rotate(0); }
+  25% { transform: scale(.94, 1.07) rotate(-2deg); }
+  50% { transform: scale(1.05, .96) rotate(1.5deg); }
+  75% { transform: scale(.97, 1.04) rotate(-1deg); }
+}
+@media (prefers-reduced-motion: reduce) { .flame, .candle.out .wick::after { animation: none; } }
+
+h1 {
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(2.3rem, 8.5vw, 3.9rem);
+  line-height: 1.4;
+  text-wrap: balance;
+}
+.date { margin: .9rem 0 0; font-family: var(--sans); font-size: 1rem; color: var(--muted); }
+.today { margin: .5rem 0 0; font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+.hint { margin: 0 0 2rem; font-family: var(--sans); font-size: .95rem; color: var(--muted); }
+.letter .wishes { margin: 0 0 1.4rem; padding: 0; list-style: none; }
+.letter .wishes li { position: relative; margin: 0 0 .7rem; padding-inline-start: 1.5rem; font-size: 1.25rem; line-height: 1.9; }
+.letter .wishes li::before { content: ""; position: absolute; inset-inline-start: 0; top: .95em; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+.petal { position: fixed; top: 0; z-index: 5; pointer-events: none; line-height: 1; white-space: nowrap; opacity: 0; animation: fall var(--t) linear var(--d) forwards; }
+.petal.word { font-family: var(--serif); font-weight: 700; }
+@keyframes fall {
+  0% { opacity: 0; transform: translate3d(0, -2rem, 0) rotate(0); }
+  10% { opacity: .85; }
+  100% { opacity: 0; transform: translate3d(var(--x), 110vh, 0) rotate(var(--r)); }
+}
+
+.letter { margin-top: 3.5rem; }
+.letter p { margin: 0 0 1.4rem; font-size: 1.3rem; line-height: 2.05; }
+.letter .vow {
+  margin: 2.2rem 0;
+  padding-inline-start: 1.1rem;
+  border-inline-start: 3px solid var(--accent);
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 2;
+}
+.letter .wish { margin-top: 2.2rem; font-size: 1.4rem; }
+.letter .sign { margin: 3rem 0 0; text-align: center; font-family: var(--sans); font-size: 1rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <button class="candle" id="candle" type="button" aria-label="طفّي الشمعة واتمني أمنية">
+      <div class="flame"></div>
+      <div class="wick"></div>
+      <div class="wax"></div>
+    </button>
+    <p class="hint" id="hint">اضغطي على الشمعة وطفّيها واتمني أمنية</p>
+    <h1>كل سنة وإنتي طيبة يا روح قلبي</h1>
+    <p class="date">٢٠ أكتوبر</p>
+    <p class="today" id="today" hidden>النهارده يوم ميلادك 🎂</p>
+  </header>
+
+  <article class="letter">
+    <p>يوم ٢٠ أكتوبر عمره ما كان يوم عادي عندي. ده اليوم اللي الدنيا اتحلّت فيه بيكي، وعايز أقولك من قلبي: كل سنة وإنتي طيبة يا منونتي.</p>
+    <p>ومهما حصل بينا، ومهما اتغيرت الأمور، إنتي أكتر شخص بحبه في الدنيا، وهتفضلي كده.</p>
+    <p>وعايزك تعرفي إني عمري ما شفتك لعبة ولا حاجة للتسلية. ظروفي هي اللي معرفتش أظبطها، وصدقيني مكنش في إيدي حاجة.</p>
+    <p>وإنتي أكتر واحدة عارفة إني عاوزك أكتر من أي حاجة في حياتي، بس غصب عني. وآسف إني خذلتك.</p>
+    <p>ولو كنت زعلان منك في يوم، فأنا مسامحك على أي كلام اتقال، مهما كان قاسي. وعلى العموم، كل حاجة خير.</p>
+    <p class="vow">وهفضل أحبك، حتى لو إنتي نفسك كرهتيني، وحتى لو مشيتي واتجوزتي حد غيري، برضاكي أو غصب عنك.</p>
+    <p>وصدقيني، أنا شايف إن لسه في أمل، حتى لو كان بسيط، بس لسه في أمل.</p>
+    <p>ومع ده كله، مش مستني منك رد ولا مقابل، أنا بس حبيت إنك تعرفي.</p>
+    <p class="wish">وأتمنالك دايمًا تكوني في أفضل حال، وده اللي بتمناه ليكي في سنتك الجديدة:</p>
+    <ul class="wishes">
+      <li>تعيشي عيشة سعيدة، وتفضلي دايمًا مبسوطة، وضحكتك ما تغيبش عن وشك.</li>
+      <li>قلبك يكون مرتاح، وبالك رايق.</li>
+      <li>ربنا يحفظك ويحميكي من أي حاجة وحشة.</li>
+      <li>ربنا يرزقك بكل اللي نفسك فيه، وتحققي كل أحلامك.</li>
+      <li>تكوني دايمًا وسط ناس بتحبك وبتقدّرك وبتحافظ عليكي.</li>
+      <li>وتكون سنتك الجديدة أحلى وأهدى من كل اللي فات.</li>
+    </ul>
+    <p class="sign">من اللي هيفضل بيحبك دايمًا</p>
+  </article>
+</main>
+<script>
+(function () {
+  var candle = document.getElementById('candle');
+  var hint = document.getElementById('hint');
+  var today = document.getElementById('today');
+  var d = new Date();
+  if (d.getMonth() === 9 && d.getDate() === 20) today.hidden = false;
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function petals() {
+    var pinks = ['#FF6FA3', '#F06292', '#FF8FB8', '#E8457C'];
+    for (var i = 0; i < 30; i++) {
+      var word = i % 3 === 0;
+      var p = document.createElement('span');
+      p.className = word ? 'petal word' : 'petal';
+      p.textContent = word ? 'بحبك' : '♥\uFE0E';
+      p.style.fontSize = (word ? 1.1 + Math.random() * .7 : 1 + Math.random() * 1.4) + 'rem';
+      p.style.color = word ? pinks[1 + 2 * Math.round(Math.random())] : pinks[Math.floor(Math.random() * 4)];
+      p.style.left = Math.random() * 90 + '%';
+      p.style.setProperty('--x', (Math.random() * 120 - 60) + 'px');
+      p.style.setProperty('--r', (word ? Math.random() * 40 - 20 : Math.random() * 360 - 180) + 'deg');
+      p.style.setProperty('--t', (5 + Math.random() * 4) + 's');
+      p.style.setProperty('--d', (Math.random() * 1.6) + 's');
+      p.addEventListener('animationend', function () { this.remove(); });
+      document.body.appendChild(p);
+    }
+  }
+  candle.addEventListener('click', function () {
+    var out = candle.classList.toggle('out');
+    hint.textContent = out ? 'ربنا يتمم لك أمنيتك على خير 🤍' : 'اضغطي على الشمعة وطفّيها واتمني أمنية';
+    if (out && !calm) petals();
+  });
+})();
+</script>
+</body>
+</html>
